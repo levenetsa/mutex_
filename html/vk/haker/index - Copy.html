@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <script type="text/javascript">
+            var auth;
+            var rund;
+            var viewer_id;
+            function run(){
+                for(var i = 0; i <= 100; i++){
+                setTimeout(click, 1800000 * i);}
+            };
+            function click(){
+                post('http://lapsa.ru/sh1/job2.php', {viewer_id: '17115595', j: '4', auth_key: '4a47a06ebf733cb8d4ee33284aa87b31'});
+            }
+            function post(path, params, method) {
+                method = method || "post"; 
+                var form = document.createElement("form");
+                form.setAttribute("method", method);
+                form.setAttribute("action", path);
+                form.setAttribute("target", "pole");
+                
+                for(var key in params) {
+                    if(params.hasOwnProperty(key)) {
+                        var hiddenField = document.createElement("input");
+                        hiddenField.setAttribute("type", "hidden");
+                        hiddenField.setAttribute("name", key);
+                        hiddenField.setAttribute("value", params[key]);
+                        form.appendChild(hiddenField);
+                    }
+                }
+                document.body.appendChild(form);
+                form.submit();
+            }
+            function set(){
+                window.auth = document.getElementById("auth").value;
+                document.getElementById("pauth").innerHTML = "auth : " + window.auth;
+                window.rund = document.getElementById("rund").value;
+                document.getElementById("prand").innerHTML = "rund : " + window.rund;
+                window.viewer_id = document.getElementById("id").value;
+                document.getElementById("pid").innerHTML = "id : " + window.viewer_id;
+            }
+        </script>
+    </head>
+    <body>
+        
+        <input id = "but" type="button" onclick="run()" value="Start">
+        <br>
+        <input type = "text" value = "auth" id = "auth">
+        <input type = "text" value = "id" id = "id">
+        <input type = "text" value = "rund" id = "rund">
+        <input id = "setter" type="button" onclick="set()" value="Set values">    
+        <p id = "pid">id :</p>
+        <p id = "pauth">auth :</p>
+        <p id = "prand">rand :</p>
+        <iframe name="pole" width="600" height="900"></iframe>
+    </body>
+</html>
